@@ -47,13 +47,6 @@ export const resumeData = {
       ]
     },
     {
-      "company": "AI Talent",
-      "role": "Software Engineer",
-      "dates": "January 2024 - Present",
-      "location": "Sydney, NSW, Australia",
-      "bullets": []
-    },
-    {
       "company": "Westpac",
       "role": "Senior DevOps Engineer",
       "dates": "April 2024 - September 2024",
