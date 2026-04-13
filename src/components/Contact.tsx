@@ -15,28 +15,29 @@ export const Contact: React.FC = () => {
     setSuccessMessage('');
 
     const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch('https://formspree.io/f/xzdybeoe', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+        headers: {
+          Accept: 'application/json',
+        },
+        body: formData,
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => null);
 
       if (response.ok) {
         setStatus('success');
-        setSuccessMessage(result.message || "Message sent successfully! I'll get back to you soon.");
+        setSuccessMessage("Message sent successfully! I'll get back to you soon.");
         (e.target as HTMLFormElement).reset();
       } else {
         setStatus('error');
-        setErrorMessage(result.error || 'Something went wrong.');
+        setErrorMessage(result?.error || result?.message || `Form submission failed (${response.status})`);
       }
     } catch (error) {
       setStatus('error');
-      setErrorMessage('Failed to connect to the server.');
+      setErrorMessage('Failed to connect to the server. Please check your network.');
     }
   };
 
@@ -59,7 +60,7 @@ export const Contact: React.FC = () => {
         viewport={{ once: true }}
         className="glass-dark p-8 md:p-12 rounded-[2.5rem]"
       >
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form action="https://formspree.io/f/xzdybeoe" method="POST" onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="name" className="text-xs font-mono uppercase tracking-widest text-accent/60 ml-1">Name</label>

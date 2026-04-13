@@ -37,7 +37,7 @@ export const Hero: React.FC = () => {
             {resumeData.basics.headline}
           </p>
 
-          <div className="flex flex-col sm:flex-row items-start gap-6">
+          <div className="flex flex-col sm:flex-row items-center gap-6">
             <button
               onClick={scrollToExperience}
               className="group relative px-10 py-5 bg-accent text-white font-bold rounded-full overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_20px_rgba(37,99,235,0.3)]"
@@ -48,7 +48,12 @@ export const Hero: React.FC = () => {
             </button>
 
             <button
-              onClick={() => window.print()}
+              onClick={() => {
+                const link = document.createElement('a');
+                link.href = '/AntrikshCV.pdf';
+                link.download = 'AntrikshCV.pdf';
+                link.click();
+              }}
               className="px-10 py-5 bg-white/5 text-white font-semibold rounded-full border border-white/10 backdrop-blur-md hover:bg-white/10 transition-all flex items-center gap-2"
             >
               <Download size={18} /> Download Resume
