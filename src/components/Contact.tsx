@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
 import { cn } from '../utils';
@@ -8,37 +8,39 @@ export const Contact: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('form') === 'success') {
+      setStatus('success');
+      setSuccessMessage("Message sent successfully! I'll get back to you soon.");
+      window.location.hash = '#contact';
+
+      params.delete('form');
+      const url = new URL(window.location.href);
+      url.search = params.toString();
+      window.history.replaceState({}, document.title, url.toString());
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('form') === 'success') {
+      setStatus('success');
+      setSuccessMessage("Message sent successfully! I'll get back to you soon.");
+      params.delete('form');
+      const url = new URL(window.location.href);
+      url.search = params.toString();
+      window.history.replaceState({}, document.title, url.toString());
+    }
+  }, []);
+
+  const handleSubmit = () => {
     setStatus('loading');
     setErrorMessage('');
     setSuccessMessage('');
-
-    const formData = new FormData(e.currentTarget);
-
-    try {
-      const response = await fetch('https://formspree.io/f/xzdybeoe', {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-        },
-        body: formData,
-      });
-
-      const result = await response.json().catch(() => null);
-
-      if (response.ok) {
-        setStatus('success');
-        setSuccessMessage("Message sent successfully! I'll get back to you soon.");
-        (e.target as HTMLFormElement).reset();
-      } else {
-        setStatus('error');
-        setErrorMessage(result?.error || result?.message || `Form submission failed (${response.status})`);
-      }
-    } catch (error) {
-      setStatus('error');
-      setErrorMessage('Failed to connect to the server. Please check your network.');
-    }
   };
 
   return (
@@ -61,6 +63,12 @@ export const Contact: React.FC = () => {
         className="glass-dark p-8 md:p-12 rounded-[2.5rem]"
       >
         <form action="https://formspree.io/f/xzdybeoe" method="POST" onSubmit={handleSubmit} className="space-y-6">
+          {status === 'success' && (
+            <div className="rounded-3xl bg-emerald-500/10 border border-emerald-500/20 p-6 text-emerald-100 mb-6">
+              <h3 className="text-2xl font-semibold">Thank you!</h3>
+              <p className="mt-2 text-white/70">Your message is on the way. I’ll reply as soon as possible.</p>
+            </div>
+          )}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <label htmlFor="name" className="text-xs font-mono uppercase tracking-widest text-accent/60 ml-1">Name</label>
@@ -109,6 +117,8 @@ export const Contact: React.FC = () => {
               className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder:text-white/20 focus:outline-none focus:border-accent/30 transition-all resize-none font-light"
             />
           </div>
+
+          <input type="hidden" name="_next" value="https://antrikshdev.github.io/?form=success#contact" />
 
           <button
             disabled={status === 'loading'}
