@@ -1,3 +1,5 @@
+import profilePicture from './profile.jpg';
+
 export const resumeData = {
   "basics": {
     "name": "Antriksh Devgan",
@@ -7,7 +9,7 @@ export const resumeData = {
     "location": "Sydney, NSW, Australia",
     "email": "antrikshdevgan@gmail.com",
     "phone": "",
-    "profileImage": "/src/profile.jpg",
+    "profileImage": profilePicture,
     "shortSummary": {
       "hook": "12 years. Three industry giants. One mission: building cloud infrastructure that scales.",
       "bio": "I've spent my career at Microsoft, BOQ, Westpac, GlobalLogic, and Thomson Digital, turning complex cloud challenges into elegant, reliable solutions. My sweet spot? Azure-native ecosystems - where DevOps pipelines, Kubernetes orchestration, and containerized microservices come together to power enterprise-grade systems.",
