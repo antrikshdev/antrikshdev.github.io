@@ -1,0 +1,160 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { Send, CheckCircle2, AlertCircle, Loader2 } from 'lucide-react';
+import { cn } from '../utils';
+
+export const Contact: React.FC = () => {
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus('loading');
+    setErrorMessage('');
+    setSuccessMessage('');
+
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData.entries());
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus('success');
+        setSuccessMessage(result.message || "Message sent successfully! I'll get back to you soon.");
+        (e.target as HTMLFormElement).reset();
+      } else {
+        setStatus('error');
+        setErrorMessage(result.error || 'Something went wrong.');
+      }
+    } catch (error) {
+      setStatus('error');
+      setErrorMessage('Failed to connect to the server.');
+    }
+  };
+
+  return (
+    <section id="contact" className="py-32 px-6 max-w-4xl mx-auto">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        className="text-center mb-16"
+      >
+        <h2 className="text-4xl md:text-5xl font-serif font-light tracking-tighter text-white mb-4">Get In Touch</h2>
+        <div className="h-1 w-16 bg-accent mx-auto rounded-full mb-4" />
+        <p className="text-white/40 font-light italic">Have a project in mind or just want to say hi? My inbox is always open.</p>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95 }}
+        whileInView={{ opacity: 1, scale: 1 }}
+        viewport={{ once: true }}
+        className="glass-dark p-8 md:p-12 rounded-[2.5rem]"
+      >
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="space-y-2">
+              <label htmlFor="name" className="text-xs font-mono uppercase tracking-widest text-accent/60 ml-1">Name</label>
+              <input
+                required
+                type="text"
+                id="name"
+                name="name"
+                placeholder="John Doe"
+                className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder:text-white/20 focus:outline-none focus:border-accent/30 transition-all font-light"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="email" className="text-xs font-mono uppercase tracking-widest text-accent/60 ml-1">Email</label>
+              <input
+                required
+                type="email"
+                id="email"
+                name="email"
+                placeholder="john@example.com"
+                className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder:text-white/20 focus:outline-none focus:border-accent/30 transition-all font-light"
+              />
+            </div>
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="subject" className="text-xs font-mono uppercase tracking-widest text-accent/60 ml-1">Subject</label>
+            <input
+              required
+              type="text"
+              id="subject"
+              name="subject"
+              placeholder="Project Inquiry"
+              className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder:text-white/20 focus:outline-none focus:border-accent/30 transition-all font-light"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="message" className="text-xs font-mono uppercase tracking-widest text-accent/60 ml-1">Message</label>
+            <textarea
+              required
+              id="message"
+              name="message"
+              rows={5}
+              placeholder="Tell me about your project..."
+              className="w-full px-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-white placeholder:text-white/20 focus:outline-none focus:border-accent/30 transition-all resize-none font-light"
+            />
+          </div>
+
+          <button
+            disabled={status === 'loading'}
+            type="submit"
+            className={cn(
+              "w-full py-5 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all active:scale-[0.98]",
+              status === 'loading' ? "bg-white/10 text-white/40 cursor-not-allowed" : "bg-accent text-white hover:scale-[1.02] shadow-[0_0_20px_rgba(37,99,235,0.2)]"
+            )}
+          >
+            {status === 'loading' ? (
+              <>
+                <Loader2 className="animate-spin" size={20} /> Sending...
+              </>
+            ) : (
+              <>
+                <Send size={20} /> Send Message
+              </>
+            )}
+          </button>
+
+          <AnimatePresence>
+            {status === 'success' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-500 flex items-center gap-3"
+              >
+                <CheckCircle2 size={20} />
+                <span>{successMessage}</span>
+              </motion.div>
+            )}
+
+            {status === 'error' && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="p-4 rounded-xl bg-red-500/10 border border-red-500/20 text-red-500 flex items-center gap-3"
+              >
+                <AlertCircle size={20} />
+                <span>{errorMessage}</span>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </form>
+      </motion.div>
+    </section>
+  );
+};
