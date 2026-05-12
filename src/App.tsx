@@ -3,11 +3,12 @@ import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react';
 import { SplashScreen } from './components/SplashScreen';
 import { AnimatedBackground } from './components/AnimatedBackground';
 import { Hero } from './components/Hero';
-import { ProfessionalPhilosophy } from './components/ProfessionalPhilosophy';
-import { Experience } from './components/Experience';
 import { Achievements } from './components/Achievements';
+import { IndustryProof } from './components/IndustryProof';
+import { CaseStudies } from './components/CaseStudies';
+import { CostOptimization } from './components/CostOptimization';
+import { Focus } from './components/Focus';
 import { Skills } from './components/Skills';
-import { Education } from './components/Education';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 
@@ -42,11 +43,12 @@ export default function App() {
             <AnimatedBackground />
             
             <Hero />
-            <ProfessionalPhilosophy />
             <Achievements />
-            <Experience />
+            <IndustryProof />
+            <CaseStudies />
+            <CostOptimization />
+            <Focus />
             <Skills />
-            <Education />
             <Contact />
             <Footer />
           </motion.main>

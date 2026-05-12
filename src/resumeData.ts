@@ -117,7 +117,7 @@ export const resumeData = {
     },
     {
       "category": "Azure Ecosystem",
-      "items": ["Azure Pipelines", "Azure DevOps Board", "Azure Policies", "Key Vault", "Container Insights", "Azure Container Registry (ACR)", "Azure Landing Zone", "VNet Integration", "Managed Identities", "Workload Identities", "Bicep", "AVM Modules"]
+      "items": ["Azure Pipelines", "Azure DevOps Board", "Azure Policies", "Key Vault", "Container Insights", "Azure Monitor Managed Prometheus", "Grafana Dashboards", "Action Groups", "Azure Container Registry (ACR)", "Azure Landing Zone", "VNet Integration", "Managed Identities", "Workload Identities", "Bicep", "AVM Modules"]
     },
     {
       "category": "Tools & Tech",
