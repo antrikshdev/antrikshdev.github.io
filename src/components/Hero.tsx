@@ -19,7 +19,7 @@ export const Hero: React.FC = () => {
   const proofPoints = [
     ['50%', 'deployment effort cut'],
     ['20+', 'AKS pods unblocked'],
-    ['12 yrs', 'enterprise delivery'],
+    ['13 yrs', 'enterprise delivery'],
     ['3 banks', 'regulated platforms'],
   ];
 
@@ -139,7 +139,7 @@ export const Hero: React.FC = () => {
             >
               <div className="flex items-center gap-4">
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-accent/20 text-accent">
-                  <span className="text-xl font-bold">12</span>
+                  <span className="text-xl font-bold">13</span>
                 </div>
                 <div>
                   <div className="text-xs font-mono uppercase tracking-widest text-white/40">Years of</div>
