@@ -77,7 +77,7 @@ export const Hero: React.FC = () => {
             <button
               onClick={() => {
                 const link = document.createElement('a');
-                link.href = '/Antriksh-CV.pdf';
+                link.href = 'https://raw.githubusercontent.com/antrikshdev/antrikshdev.github.io/main/public/Antriksh-CV.pdf';
                 link.download = 'Antriksh-CV.pdf';
                 link.click();
               }}
