@@ -5,13 +5,13 @@ export const resumeData = {
     "name": "Antriksh Devgan",
     "title": "Senior Platform & Azure DevOps Engineer",
     "headline": "Ex Microsoft | Certified Azure Engineer | Expertise in AKS, ACI, Kubernetes & Infrastructure Management",
-    "summary": "12 years. Three industry giants. One mission: building cloud infrastructure that scales. I've spent my career at Microsoft, BOQ, Westpac, GlobalLogic, and Thomson Digital, turning complex cloud challenges into elegant, reliable solutions. My sweet spot? Azure-native ecosystems - where DevOps pipelines, Kubernetes orchestration, and containerized microservices come together to power enterprise-grade systems.",
+    "summary": "13 years. Three industry giants. One mission: building cloud infrastructure that scales. I've spent my career at Microsoft, BOQ, Westpac, GlobalLogic, and Thomson Digital, turning complex cloud challenges into elegant, reliable solutions. My sweet spot? Azure-native ecosystems - where DevOps pipelines, Kubernetes orchestration, and containerized microservices come together to power enterprise-grade systems.",
     "location": "Sydney, NSW, Australia",
     "email": "antrikshdevgan@gmail.com",
     "phone": "",
     "profileImage": profilePicture,
     "shortSummary": {
-      "hook": "12 years. Three industry giants. One mission: building cloud infrastructure that scales.",
+      "hook": "13 years. Three industry giants. One mission: building cloud infrastructure that scales.",
       "bio": "I've spent my career at Microsoft, BOQ, Westpac, GlobalLogic, and Thomson Digital, turning complex cloud challenges into elegant, reliable solutions. My sweet spot? Azure-native ecosystems - where DevOps pipelines, Kubernetes orchestration, and containerized microservices come together to power enterprise-grade systems.",
       "highlights": [
         "End-to-end Azure DevOps - Pipelines, Release Management",
