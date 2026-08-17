@@ -39,7 +39,7 @@ export const Hero: React.FC = () => {
             className="mb-6 inline-block rounded-full border border-white/10 bg-white/5 px-4 py-1.5 backdrop-blur-md"
           >
             <span className="text-xs font-mono uppercase tracking-widest text-white/60">
-              Senior DevOps & Azure Engineer
+              Senior Platform & Azure DevOps Engineer
             </span>
           </motion.div>
 
