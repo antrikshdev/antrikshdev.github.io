@@ -77,8 +77,8 @@ export const Hero: React.FC = () => {
             <button
               onClick={() => {
                 const link = document.createElement('a');
-                link.href = '/AntrikshCV.pdf';
-                link.download = 'AntrikshCV.pdf';
+                link.href = '/Antriksh-CV.pdf';
+                link.download = 'Antriksh-CV.pdf';
                 link.click();
               }}
               className="flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-10 py-5 font-semibold text-white backdrop-blur-md transition-all hover:bg-white/10"
